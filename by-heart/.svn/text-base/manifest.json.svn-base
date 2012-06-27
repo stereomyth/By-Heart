@@ -1,0 +1,19 @@
+{
+    "name":"by heart",
+    "version":"0.5",
+    "manifest_version":2,
+    "description":"a beautiful bookmark menu for chrome",
+    "icons":{
+        "16":"assets/icon16.png",
+        "48":"assets/icon48.png",
+        "128":"assets/icon128.png"
+    },
+    "browser_action":{
+        "default_icon":"assets/icon19.png",
+        "default_title":"by heart",
+        "default_popup":"popup.html"
+    },
+    "permissions":[
+        "tabs", "http://*/*", "bookmarks", "chrome://favicon/"
+    ]
+}
