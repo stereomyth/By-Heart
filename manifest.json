@@ -13,6 +13,7 @@
         "default_title":"by heart",
         "default_popup":"popup.html"
     },
+    "options_page": "options.html",
     "permissions":[
         "tabs", "http://*/*", "bookmarks", "chrome://favicon/"
     ]

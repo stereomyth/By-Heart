@@ -1,5 +1,8 @@
-
 by heart
 ========
 
-Its the shit bitches
+A simple bookmarks extension for google chrome.
+
+Made in my spare time.
+
+It will get better.
