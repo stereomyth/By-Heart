@@ -63,6 +63,14 @@ ul {
     -webkit-user-select: none;
     /*border-bottom: 1px solid white;*/
     /*box-shadow: inset 0px -3px 10px -5px rgba(0,0,0,0.5)*/
+
+}
+
+.folder:before{
+    content: "> "
+}
+.folder.open:before{
+    content: "~ "
 }
 
 .folder, .link {
