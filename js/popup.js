@@ -30,105 +30,92 @@ function buildList(bookmarkTree, level) {
 
 function buildItem(bookmarkItem, level) {
 
-    var html = $('<li>');
+    // console.log(bookmarkItem); 
+
+    bookmarkItem.level = parseInt(level) + 1;
     
-    var item;
-    
-    var thisLevel = parseInt(level) + 1;
-    
-    var levelPadding = thisLevel * padding;
-    
+    bookmarkItem.levelPadding = bookmarkItem.level * padding; 
+
     if (bookmarkItem.url) {
-    
-        item = $('<a>')
-            .text(bookmarkItem.title)
-            .attr('href', bookmarkItem.url)
-            .attr('id', bookmarkItem.id)
-            .addClass('link')
-            .css('padding-left', levelPadding);
-    
-        var favicon = $('<img width="16" height="16">')
-            .attr('src', 'chrome://favicon/' + bookmarkItem.url);
-    
-        item.prepend(favicon)
-            .mousedown(function (e) {
 
-                if (e.which === 1) {
-
-                    chrome.tabs.getSelected(null, function (tab) {
-
-                        chrome.tabs.update(tab.id, {url:bookmarkItem.url});
-
-                    });
-
-                }
-
-                if (e.which === 2) {
-
-                    event.preventDefault();
-
-                    //chrome.tabs.create({url:bookmarkItem.url});
-
-                }
-
-                if (e.which === 3) {
-
-                    contextMenu(e, bookmarkItem);
-
-                }
-
-            });
-
-        html.append(item);
+        var template = Handlebars.templates.bookmark;
 
     } else {
 
-        item = $('<div>')
-            .text(bookmarkItem.title)
-            .addClass('folder unloaded')
-            .attr('id', bookmarkItem.id)
-            .attr('data-level', thisLevel)
-            .attr('data-parent', bookmarkItem.parentId)
-            .css('padding-left', levelPadding)
-            .mousedown(function (e) {
-
-                if (e.which === 1) {
-
-                    if ($(this).hasClass('unloaded')) {
-                    
-                        $(this).removeClass('unloaded').addClass('open');
-                    
-                        var itemLevel = $(this).attr('data-level');
-                    
-                        var newChildren = chrome.bookmarks.getChildren(bookmarkItem.id, function (newChildren) {
-                    
-                            $('#' + bookmarkItem.id).parent().append(buildList(newChildren, itemLevel));
-                    
-                        });
-
-                    } else if ($(this).hasClass('open')) {
-
-                        $(this).removeClass('open').addClass('closed').siblings('ul').addClass('noShow');
-
-                    } else {
-
-                        $(this).removeClass('closed').addClass('open').siblings('ul').removeClass('noShow');
-
-                    }
-
-                } else if (e.which === 3) {
-
-                    contextMenu(e, bookmarkItem);
-
-                }
-
-            });
-
-        html.append(item);
+        var template = Handlebars.templates.folder;
 
     }
 
-    return html;
+    var html = template(bookmarkItem);
+    
+    return html
+
+
+    $("#bookmarks").on("click", ".folder", function(event){
+        console.log(event);
+    });
+
+    //         .mousedown(function (e) {
+
+    //             if (e.which === 1) {
+
+    //                 chrome.tabs.getSelected(null, function (tab) {
+
+    //                     chrome.tabs.update(tab.id, {url:bookmarkItem.url});
+
+    //                 });
+
+    //             }
+
+    //             if (e.which === 2) {
+
+    //                 event.preventDefault();
+
+    //                 //chrome.tabs.create({url:bookmarkItem.url});
+
+    //             }
+
+    //             if (e.which === 3) {
+
+    //                 contextMenu(e, bookmarkItem);
+
+    //             }
+
+    //         });
+
+    //         .mousedown(function (e) {
+
+    //             if (e.which === 1) {
+
+    //                 if ($(this).hasClass('unloaded')) {
+                    
+    //                     $(this).removeClass('unloaded').addClass('open');
+                    
+    //                     var itemLevel = $(this).attr('data-level');
+                    
+    //                     var newChildren = chrome.bookmarks.getChildren(bookmarkItem.id, function (newChildren) {
+                    
+    //                         $('#' + bookmarkItem.id).parent().append(buildList(newChildren, itemLevel));
+                    
+    //                     });
+
+    //                 } else if ($(this).hasClass('open')) {
+
+    //                     $(this).removeClass('open').addClass('closed').siblings('ul').addClass('noShow');
+
+    //                 } else {
+
+    //                     $(this).removeClass('closed').addClass('open').siblings('ul').removeClass('noShow');
+
+    //                 }
+
+    //             } else if (e.which === 3) {
+
+    //                 contextMenu(e, bookmarkItem);
+
+    //             }
+
+    //         });
 
 }
 
