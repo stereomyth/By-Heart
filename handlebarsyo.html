@@ -1,0 +1,22 @@
+<html>
+
+<head>
+
+<script src="handlebars.runtime.js"></script>
+<script src="assets/jq.js"></script>
+<script src="test.js"></script>
+
+<script type="text/javascript">
+	var template = Handlebars.templates['test'];
+	var context = {title: "My New Post", body: "This is my first post!"}
+	var html    = template(context);
+	console.log(html);
+</script>
+
+</head>
+
+<body>
+<script type="text/javascript"></script>
+</body>
+
+</html>
