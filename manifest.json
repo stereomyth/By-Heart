@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
 
-    "name": "By Heart Again",
+    "name": "By Heart",
     "version": "1.0",
     "description": "A beautiful bookmarks menu for quick access and searching",
 
@@ -17,7 +17,7 @@
 
     "browser_action": {
         "default_icon": {                    
-            "19": "img/icon19.png",           
+            "19": "img/icon19-3.png",           
             "38": "img/icon38.png"            
         },
         "default_title": "By Heart",      

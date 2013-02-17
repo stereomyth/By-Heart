@@ -1,14 +1,33 @@
+<!doctype html>
 <html>
 <head>
+	<title>by heart. options</title>
 
-	<title>By Heart</title>
+	<script src="js/jq.js"></script>
+	<script src="js/options.js"></script>
 
-	<script src="popup.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+
 
 </head>
-<body>
+<body id="options">
+	<div id="optionsWrapper">
 
-	This is an options page.
+		<h1>Options</h1>
 
+		<form id="optionsForm">
+
+			<label>Icon</label><br><br>
+			<input type="radio" name="icon" id="iconC"> <img class="iconImg" src="img/icon19-1.png"> <label for="iconC">Coloured</label> <br>
+			<input type="radio" name="icon" id="iconI"> <img class="iconImg" src="img/icon19-2.png"> <label for="iconI">Inverted</label> <br>
+			<input type="radio" name="icon" id="iconH"> <img class="iconImg" src="img/icon19-3.png"> <label for="iconH">Hollow</label> 
+
+			<!-- <hr>
+
+			<label for="option1">Option 1</label><br><input type="text" value="" id="option1"> -->
+
+		</form>
+
+	</div>
 </body>
 </html>

@@ -1,4 +1,7 @@
 // by heart
+
+"use strict";
+
 var padding = 15;
 var startFolder = '1';
 var ls = localStorage;
@@ -12,15 +15,15 @@ function getBookmarkTree() {
 
         $('#bookmarks').append(buildList(bookmarkTree, level));
 
-        //folderManip(startFolder);
     });
 }
 
 function buildList(bookmarkTree, level) {
 
-    var list = $('<ul>');
+    var list = $('<ul>'),
+        i;
 
-    for (i = 0; i < bookmarkTree.length; i++) {
+    for (i = 0; i < bookmarkTree.length; i += 1) {
 
         list.append(buildItem(bookmarkTree[i], level));
 
@@ -31,17 +34,18 @@ function buildList(bookmarkTree, level) {
 
 function buildItem(bookmarkItem, level) {
 
-    // console.log(bookmarkItem); 
+    var template,
+        html;
 
-    bookmarkItem.level = parseInt(level) + 1;
-    
-    bookmarkItem.levelPadding = bookmarkItem.level * padding; 
+    bookmarkItem.level = parseInt(level, 10) + 1;
 
-    var template = (bookmarkItem.url) ? Handlebars.templates.bookmark : Handlebars.templates.folder;
+    bookmarkItem.levelPadding = bookmarkItem.level * padding;
 
-    var html = template(bookmarkItem);
-    
-    return html
+    template = (bookmarkItem.url) ? Handlebars.templates.bookmark : Handlebars.templates.folder;
+
+    html = template(bookmarkItem);
+
+    return html;
 
 }
 
@@ -56,20 +60,20 @@ function addListners() {
 
     });
 
-    $("#bookmarks").on("click", ".folder", function(event) {
+    $("#wrapper").on("click", ".folder", function (event) {
 
-        var theFolder = $(this);
+        var itemLevel, newChildren, theFolder = $(this);
 
         if (theFolder.hasClass('unloaded')) {
-        
+
             theFolder.removeClass('unloaded').addClass('open');
-        
-            var itemLevel = theFolder.data('level');
-        
-            var newChildren = chrome.bookmarks.getChildren(theFolder.context.id, function (newChildren) {
-        
+
+            itemLevel = theFolder.data('level');
+
+            newChildren = chrome.bookmarks.getChildren(theFolder.context.id, function (newChildren) {
+
                 $('#' + theFolder.context.id).parent().append(buildList(newChildren, itemLevel));
-        
+
             });
 
         } else if (theFolder.hasClass('open')) {
@@ -84,19 +88,23 @@ function addListners() {
 
     });
 
-    $("#bookmarks").on("click", ".link" , function(event) {
+    $("#wrapper").on("click", ".link", function (event) {
 
         var that = $(this);
 
-        chrome.tabs.getSelected(null, function (tab) { chrome.tabs.update(tab.id, {url:that.context.href}); });
+        console.log(that.context.href);
 
-        chrome.tabs.getSelected(null, function(tab) {
-            chrome.tabs.update(tab.id, { selected: true } )
+        chrome.tabs.getSelected(null, function (tab) { 
+            chrome.tabs.update(tab.id, {url: that.context.href}); 
         });
 
-    })
+        chrome.tabs.getSelected(null, function (tab) {
+            chrome.tabs.update(tab.id, { selected: true });
+        });
 
-    $("#bookmarks").on("contextmenu", ".link, .folder" , function(event) {
+    });
+
+    $("#bookmarks").on("contextmenu", ".link, .folder", function (event) {
 
         event.preventDefault();
 
@@ -110,58 +118,48 @@ function addListners() {
 
 function contextMenu(event, bookmarkItem) {
 
-    $('#context').show().css('left', event.pageX).css('top', event.pageY);
-
-}
-
-function localStuff() {
-   // var theBook = $('.open');
-   // ls.poop = JSON.stringify(theBook);
-   // console.debug(ls.poop);
+    // $('#context').show().css('left', event.pageX).css('top', event.pageY);
 
 }
 
 function goGoSearch() {
 
-    var searchTerm = $('#searchBox').val().trim();
-    
+    var searchTerm = $('#searchBox').val().trim(),
+        searchList;
+
     if (searchTerm) {
-    
-        var searchList = chrome.bookmarks.search(searchTerm, function (searchList) {
-    
+
+        searchList = chrome.bookmarks.search(searchTerm, function (searchList) {
+
             if (searchList.length > 0) {
-    
+
                 $('#searchHole').empty().append(buildList(searchList.slice(0, 50)));
                 $('#searchHole').show();
                 $('#bookmarks').hide();
-    
+
             } else {
-    
+
                 $('#searchHole').text('nuffin');
-    
+
             }
 
         });
-    
+
     } else {
-    
+
         $('#searchHole').empty();
         $('#bookmarks').show();
-    
+
     }
 
     ls.searchTerm = searchTerm;
 
 }
 
-function buildSearchList(searchList) {
-
-}
-
 document.addEventListener('DOMContentLoaded', function () {
 
     getBookmarkTree();
-    addListners();   
+    addListners();
 
     if (ls.searchTerm) { goGoSearch(); }
 

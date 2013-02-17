@@ -18,7 +18,7 @@ helpers = helpers || Handlebars.helpers; data = data || {};
   if (stack1 = helpers.levelPadding) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.levelPadding; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "px;\">\n		<img width=\"16\" height=\"16\" src=\"chrome://favicon/";
+    + "px;\">\n		<img class=\"favicon\" src=\"chrome://favicon/";
   if (stack1 = helpers.url) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.url; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
