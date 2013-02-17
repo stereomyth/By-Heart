@@ -66,12 +66,12 @@ ul {
 
 }
 
-.folder:before{
+/*.folder:before{
     content: "> "
 }
 .folder.open:before{
     content: "~ "
-}
+}*/
 
 .folder, .link {
     height: 20px;

@@ -2,6 +2,7 @@
 var padding = 15;
 var startFolder = '1';
 var ls = localStorage;
+var searchTimeout;
 
 function getBookmarkTree() {
 
@@ -36,92 +37,80 @@ function buildItem(bookmarkItem, level) {
     
     bookmarkItem.levelPadding = bookmarkItem.level * padding; 
 
-    if (bookmarkItem.url) {
-
-        var template = Handlebars.templates.bookmark;
-
-    } else {
-
-        var template = Handlebars.templates.folder;
-
-    }
+    var template = (bookmarkItem.url) ? Handlebars.templates.bookmark : Handlebars.templates.folder;
 
     var html = template(bookmarkItem);
     
     return html
 
+}
 
-    $("#bookmarks").on("click", ".folder", function(event){
-        console.log(event);
+
+function addListners() {
+
+    $('#searchBox').val(ls.searchTerm).keyup(function (event) {
+
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(goGoSearch, 200);
+
     });
 
-    //         .mousedown(function (e) {
+    $("#bookmarks").on("click", ".folder", function(event) {
 
-    //             if (e.which === 1) {
+        var theFolder = $(this);
 
-    //                 chrome.tabs.getSelected(null, function (tab) {
+        if (theFolder.hasClass('unloaded')) {
+        
+            theFolder.removeClass('unloaded').addClass('open');
+        
+            var itemLevel = theFolder.data('level');
+        
+            var newChildren = chrome.bookmarks.getChildren(theFolder.context.id, function (newChildren) {
+        
+                $('#' + theFolder.context.id).parent().append(buildList(newChildren, itemLevel));
+        
+            });
 
-    //                     chrome.tabs.update(tab.id, {url:bookmarkItem.url});
+        } else if (theFolder.hasClass('open')) {
 
-    //                 });
+            theFolder.removeClass('open').siblings('ul').addClass('noShow');
 
-    //             }
+        } else {
 
-    //             if (e.which === 2) {
+            theFolder.addClass('open').siblings('ul').removeClass('noShow');
 
-    //                 event.preventDefault();
+        }
 
-    //                 //chrome.tabs.create({url:bookmarkItem.url});
+    });
 
-    //             }
+    $("#bookmarks").on("click", ".link" , function(event) {
 
-    //             if (e.which === 3) {
+        var that = $(this);
 
-    //                 contextMenu(e, bookmarkItem);
+        chrome.tabs.getSelected(null, function (tab) { chrome.tabs.update(tab.id, {url:that.context.href}); });
 
-    //             }
+        chrome.tabs.getSelected(null, function(tab) {
+            chrome.tabs.update(tab.id, { selected: true } )
+        });
 
-    //         });
+    })
 
-    //         .mousedown(function (e) {
+    $("#bookmarks").on("contextmenu", ".link, .folder" , function(event) {
 
-    //             if (e.which === 1) {
+        event.preventDefault();
 
-    //                 if ($(this).hasClass('unloaded')) {
-                    
-    //                     $(this).removeClass('unloaded').addClass('open');
-                    
-    //                     var itemLevel = $(this).attr('data-level');
-                    
-    //                     var newChildren = chrome.bookmarks.getChildren(bookmarkItem.id, function (newChildren) {
-                    
-    //                         $('#' + bookmarkItem.id).parent().append(buildList(newChildren, itemLevel));
-                    
-    //                     });
+        contextMenu(event, $(this));
 
-    //                 } else if ($(this).hasClass('open')) {
+    });
 
-    //                     $(this).removeClass('open').addClass('closed').siblings('ul').addClass('noShow');
 
-    //                 } else {
-
-    //                     $(this).removeClass('closed').addClass('open').siblings('ul').removeClass('noShow');
-
-    //                 }
-
-    //             } else if (e.which === 3) {
-
-    //                 contextMenu(e, bookmarkItem);
-
-    //             }
-
-    //         });
 
 }
 
-function contextMenu(e, bookmarkItem) {
+function contextMenu(event, bookmarkItem) {
 
-    $('#context').show().css('left', e.pageX).css('top', e.pageY);
+    $('#context').show().css('left', event.pageX).css('top', event.pageY);
 
 }
 
@@ -129,23 +118,11 @@ function localStuff() {
    // var theBook = $('.open');
    // ls.poop = JSON.stringify(theBook);
    // console.debug(ls.poop);
-    $('#searchBox').val(ls.searchTerm).keyup(function (event) {
 
-        goGoSearch();
-
-    });
-
-    if (ls.searchTerm) {
-    
-        goGoSearch();
-    
-    }
 }
 
 function goGoSearch() {
 
-    ls.searchTerm = $('#searchBox').val();
-    
     var searchTerm = $('#searchBox').val().trim();
     
     if (searchTerm) {
@@ -154,7 +131,7 @@ function goGoSearch() {
     
             if (searchList.length > 0) {
     
-                $('#searchHole').empty().append(buildList(searchList.slice(0, 100)));
+                $('#searchHole').empty().append(buildList(searchList.slice(0, 50)));
                 $('#searchHole').show();
                 $('#bookmarks').hide();
     
@@ -168,10 +145,12 @@ function goGoSearch() {
     
     } else {
     
-        $('#searchHole').hide();
+        $('#searchHole').empty();
         $('#bookmarks').show();
     
     }
+
+    ls.searchTerm = searchTerm;
 
 }
 
@@ -182,7 +161,9 @@ function buildSearchList(searchList) {
 document.addEventListener('DOMContentLoaded', function () {
 
     getBookmarkTree();
-    localStuff();
+    addListners();   
+
+    if (ls.searchTerm) { goGoSearch(); }
 
     // var _gaq = _gaq || [];
     // _gaq.push(['_setAccount', 'UA-33494524-1']);
