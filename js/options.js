@@ -23,7 +23,7 @@ var options = {
 
 		$('#optionsForm').on('click', 'input[type=radio]', function () {
 
-			var iconNum, iconName = $(this).attr('id');
+			var iconName = $(this).attr('id');
 
 			options.store($(this).attr('name'), iconName);
 
