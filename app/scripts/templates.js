@@ -1,6 +1,6 @@
-(function() {
-  var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
-templates['bookmark'] = template(function (Handlebars,depth0,helpers,partials,data) {
+this["Handlebars"] = this["Handlebars"] || {};
+
+this["Handlebars"]["bookmark"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -17,4 +17,12 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "</a></div>";
   return buffer;
   });
-})();
+
+this["Handlebars"]["folder"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div>folder</div>";
+  });
