@@ -9,6 +9,11 @@ var popup = {
 
         popup.listnerInit();
 
+        $('.search').val(popup.ls.searchValue);
+
+        if (popup.ls.searchValue !== '') {
+            popup.search(popup.ls.searchValue);
+        }
 
         return this;
 
@@ -17,6 +22,8 @@ var popup = {
     listnerInit: function () {
 
         $('.search').on('keyup', function() {
+
+            popup.ls.searchValue = $(this).val();
 
             popup.search($(this).val());
 
