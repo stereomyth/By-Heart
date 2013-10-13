@@ -40,6 +40,10 @@ module.exports = function (grunt) {
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
                 tasks: ['compass:server']
+            },
+            handlebars: {
+                files: ['<%= yeoman.app %>/templates/{,*/}*.{hbs,handlebars}'],
+                tasks: ['handlebars:compile']
             }
         },
         connect: {
@@ -272,6 +276,20 @@ module.exports = function (grunt) {
                     dest: ''
                 }]
             }
+        },
+        handlebars: {
+            compile: {
+                options: {
+                    namespace: 'Handlebars',
+                    processName: function(filePath) {
+                        var pieces = filePath.split("/");
+                        return pieces[pieces.length - 1].replace('.handlebars', ''); 
+                    }
+                },
+                files: {
+                    "<%= yeoman.app %>/scripts/templates.js": "<%= yeoman.app %>/templates/*.handlebars"
+                }
+            }
         }
     });
 
@@ -284,6 +302,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'handlebars',
         'chromeManifest:dist',
         'useminPrepare',
         'concurrent:dist',
@@ -300,4 +319,5 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
 };
