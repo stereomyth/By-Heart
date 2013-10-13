@@ -22,9 +22,11 @@ body {
 		box-sizing: border-box;
 		padding: 20px;
 		display: block;
+		white-space:nowrap;
 
-		&:hover {
-			background: yellow; 
+		&:focus, &:hover {
+			background: yellow;
+			outline: 0;
 		}
 	}
 }

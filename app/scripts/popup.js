@@ -9,11 +9,11 @@ var popup = {
 
         popup.listnerInit();
 
-        $('.search').val(popup.ls.searchValue);
+        $('.search').val(popup.ls.query);
 
-        if (popup.ls.searchValue !== '') {
+        if (popup.ls.query !== '') {
 
-            popup.search(popup.ls.searchValue);
+            popup.search();
 
         }
 
@@ -25,9 +25,9 @@ var popup = {
 
         $('.search').on('keyup', function() {
 
-            popup.ls.searchValue = $(this).val();
+            clearTimeout(popup.keyDelay);
 
-            popup.search($(this).val());
+            popup.keyDelay = setTimeout(popup.search, 200);
 
         });
 
@@ -44,9 +44,14 @@ var popup = {
                 console.log('up');
                 break;
 
+            case 13:
+
+                console.log('enter');
+                break;
+
             default:
 
-                console.log('dont know that');
+                // console.log('dont know that');
 
             }
 
@@ -54,7 +59,11 @@ var popup = {
 
     },
 
-    search: function (query) {
+    search: function () {
+
+        var query = $('.search').val().trim();
+
+        popup.ls.query = query;
 
         chrome.bookmarks.search(query, function (bookmarksArray) {
 

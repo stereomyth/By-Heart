@@ -24,8 +24,10 @@ body {
   box-sizing: border-box;
   padding: 20px;
   display: block;
+  white-space: nowrap;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000326}}
-.bookmarks a:hover {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000327}}
+.bookmarks a:focus, .bookmarks a:hover {
   background: yellow;
+  outline: 0;
 }
