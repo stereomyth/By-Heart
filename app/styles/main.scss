@@ -1,10 +1,7 @@
 body {
-	// background: blue;
-	// overflow: auto;
 	margin: 0;
 	background: red;
 	width: 300px;
-	// height: 300px; 
 }
 
 .search {
@@ -15,12 +12,13 @@ body {
 	font-size: 3em;
 	outline: 0;
 	padding: 10px;
-
+	box-sizing: border-box;
 }
 
 .bookmarks {
 	div{
-		padding: 10px;
+		box-sizing: border-box;
+		padding: 20px;
 		&:hover {
 			background: yellow; 
 		}

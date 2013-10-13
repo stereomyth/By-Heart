@@ -5,7 +5,7 @@ body {
   width: 300px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000310}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\000037}}
 .search {
   background: orange;
   width: 100%;
@@ -14,17 +14,19 @@ body {
   font-size: 3em;
   outline: 0;
   padding: 10px;
+  box-sizing: border-box;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000322}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000319}}
 .bookmarks div {
-  padding: 10px;
+  box-sizing: border-box;
+  padding: 20px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000324}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000322}}
 .bookmarks div:hover {
   background: yellow;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000328}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000326}}
 .bookmarks a {
   text-decoration: none;
   color: black;
