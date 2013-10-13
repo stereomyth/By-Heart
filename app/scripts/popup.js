@@ -12,7 +12,9 @@ var popup = {
         $('.search').val(popup.ls.searchValue);
 
         if (popup.ls.searchValue !== '') {
+
             popup.search(popup.ls.searchValue);
+
         }
 
         return this;
@@ -26,6 +28,27 @@ var popup = {
             popup.ls.searchValue = $(this).val();
 
             popup.search($(this).val());
+
+        });
+
+        $('body').on('keydown', function (event) {
+
+            switch (event.keyCode) {
+            case 40:
+
+                console.log('down');
+                break;
+
+            case 38:
+
+                console.log('up');
+                break;
+
+            default:
+
+                console.log('dont know that');
+
+            }
 
         });
 
@@ -45,15 +68,15 @@ var popup = {
 
         $('.bookmarks').empty();
 
-        var howMany = (bookmarksArray.length > 10) ? 10 : bookmarksArray.length;
+        var howMany = (bookmarksArray.length > 10) ? 10 : bookmarksArray.length,
+            thisBookmark,
+            i;
 
-        for (var i = 0; i < howMany; i++) {
+        for (i = 0; i < howMany; i += 1) {
 
-            // console.log(bookmarksArray[i].title);
+            thisBookmark = $.extend(bookmark, {
 
-            var thisBookmark = $.extend(bookmark, {
-
-                datas: bookmarksArray[i],
+                datas: bookmarksArray[i]
 
             });
 
@@ -73,18 +96,18 @@ var bookmark = {
 
     init: function () {
 
-        bookmark.domObject = Handlebars.templates.bookmark(bookmark.datas);
+        bookmark.domObject = Handlebars.bookmark(bookmark.datas);
 
     },
 
-    unfurlDatas: function (argument) {
+    unfurlDatas: function () {
 
         bookmark.title = bookmark.datas.title;
         bookmark.url = bookmark.datas.url;
 
     }
 
-}
+};
 
 $(document).ready(function () {
     'use strict';
