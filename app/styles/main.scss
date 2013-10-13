@@ -17,3 +17,16 @@ body {
 	padding: 10px;
 
 }
+
+.bookmarks {
+	div{
+		padding: 10px;
+		&:hover {
+			background: yellow; 
+		}
+	}
+	a {
+		text-decoration: none;
+		color: black; 
+	}
+}

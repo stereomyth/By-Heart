@@ -15,3 +15,17 @@ body {
   outline: 0;
   padding: 10px;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000322}}
+.bookmarks div {
+  padding: 10px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000324}}
+.bookmarks div:hover {
+  background: yellow;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000328}}
+.bookmarks a {
+  text-decoration: none;
+  color: black;
+}
