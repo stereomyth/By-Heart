@@ -1,3 +1,4 @@
+
 var popup = {
 
     ls: localStorage,
@@ -7,6 +8,7 @@ var popup = {
     init: function () {
 
         popup.listnerInit();
+
 
         return this;
 
@@ -64,16 +66,7 @@ var bookmark = {
 
     init: function () {
 
-        bookmark.unfurlDatas();
-
-        bookmark.domObject = $('<a/>', {
-
-                'href': bookmark.url,
-
-                'text': bookmark.title,
-
-            });
-
+        bookmark.domObject = Handlebars.templates.bookmark(bookmark.datas);
 
     },
 
