@@ -18,16 +18,14 @@ body {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000319}}
-.bookmarks div {
-  box-sizing: border-box;
-  padding: 20px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000322}}
-.bookmarks div:hover {
-  background: yellow;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000326}}
 .bookmarks a {
   text-decoration: none;
   color: black;
+  box-sizing: border-box;
+  padding: 20px;
+  display: block;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000326}}
+.bookmarks a:hover {
+  background: yellow;
 }
