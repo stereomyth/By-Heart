@@ -1,5 +1,17 @@
-/* Will be compiled down to a single stylesheet with your sass files */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\000031}}
+body {
+  margin: 0;
+  background: red;
+  width: 300px;
+}
 
-html {
-    /* Defaults css for cssmin process */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/James\/Dropbox\/Code\/By\%20Heart\/app\/styles\/main\.scss}line{font-family:\0000310}}
+.search {
+  background: orange;
+  width: 100%;
+  border: none;
+  margin: 0;
+  font-size: 3em;
+  outline: 0;
+  padding: 10px;
 }
