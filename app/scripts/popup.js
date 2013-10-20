@@ -51,7 +51,7 @@ var popup = {
 
             default:
 
-                // console.log('dont know that');
+                console.log(event.keyCode);
 
             }
 
@@ -77,11 +77,12 @@ var popup = {
 
         $('.bookmarks').empty();
 
-        var howMany = (bookmarksArray.length > 10) ? 10 : bookmarksArray.length,
-            thisBookmark,
+        bookmarksArray = bookmarksArray.slice(0, 20);
+
+        var thisBookmark,
             i;
 
-        for (i = 0; i < howMany; i += 1) {
+        for (i = 0; i < bookmarksArray.length; i += 1) {
 
             thisBookmark = $.extend(bookmark, {
 
