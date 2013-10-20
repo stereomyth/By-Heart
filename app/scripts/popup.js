@@ -38,6 +38,12 @@ var popup = {
 
         });
 
+        $('.bookmarks').on('mousedown', '.bookmark', function () {
+
+            popup.launch();
+
+        });
+
     },
 
     search: function () {
@@ -148,7 +154,7 @@ var popup = {
 
     launch: function () {
 
-        // open tab
+        chrome.tabs.create({'url': $('.bookmark.active').attr('href')});
 
     }
 
