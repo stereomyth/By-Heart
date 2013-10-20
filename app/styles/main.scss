@@ -1,11 +1,18 @@
+
+
 body {
+  // height: 100%;
+  // width: 100%;
+  overflow: hidden;
 	margin: 0;
-	background: red;
-	width: 300px;
+	// background: red;
+	// width: 300px;
+
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
 .search {
-	background: orange;
+	// background: orange;
 	width: 100%;
 	border: none;
 	margin: 0;
@@ -13,19 +20,28 @@ body {
 	outline: 0;
 	padding: 10px;
 	box-sizing: border-box;
+	border-bottom: 1px solid #eee;
+	position: fixed; 
 }
 
 .bookmarks {
+	width: 300px;
+	max-height: 510px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding-top: 77px;
 	a {
 		text-decoration: none;
 		color: black; 
 		box-sizing: border-box;
 		padding: 20px;
+		// width: 300px;
 		display: block;
 		white-space:nowrap;
+		overflow: hidden;
 
 		&:focus, &:hover {
-			background: yellow;
+			background: #fff200;
 			outline: 0;
 		}
 	}
