@@ -1,47 +1,46 @@
-
-
 body {
-  // height: 100%;
-  // width: 100%;
-  overflow: hidden;
+	overflow: hidden;
 	margin: 0;
-	// background: red;
-	// width: 300px;
-
 	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
 .search {
-	// background: orange;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 	width: 100%;
 	border: none;
 	margin: 0;
 	font-size: 3em;
 	outline: 0;
-	padding: 10px;
+	padding: 10px 20px;
 	box-sizing: border-box;
 	border-bottom: 1px solid #eee;
 	position: fixed; 
 }
 
 .bookmarks {
+	box-sizing: border-box;
 	width: 300px;
-	max-height: 510px;
+	max-height: 600px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding-top: 77px;
+	padding-top: 84px;
+
 	a {
+		border-bottom: 1px solid #eee;
 		text-decoration: none;
 		color: black; 
 		box-sizing: border-box;
 		padding: 20px;
-		// width: 300px;
 		display: block;
 		white-space:nowrap;
 		overflow: hidden;
+		transition: border 0.3s;
+		border-left: solid 0px #fff200;
 
-		&:focus, &:hover {
-			background: #fff200;
+		&.active {
+			// background: #fff200;
+			// border-left: 15px solid ;
+			border-left-width: 15px;
 			outline: 0;
 		}
 	}
