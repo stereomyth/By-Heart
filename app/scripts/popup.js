@@ -3,6 +3,8 @@ var popup = {
 
     ls: localStorage,
 
+    prevQuery: '',
+
     // popup: popup,   // ???
 
     init: function () {
@@ -44,11 +46,17 @@ var popup = {
 
         popup.ls.query = query;
 
-        chrome.bookmarks.search(query, function (bookmarksArray) {
+        if (query !== popup.prevQuery) {
 
-            popup.buildList(bookmarksArray);
+            chrome.bookmarks.search(query, function (bookmarksArray) {
 
-        });
+                popup.buildList(bookmarksArray);
+
+            });
+
+            popup.prevQuery = query;
+            
+        }
 
     },
 
@@ -60,7 +68,7 @@ var popup = {
             // Down
 
             popup.changeActive(event);
-            
+
             break;
 
         case 38:
@@ -72,6 +80,8 @@ var popup = {
             break;
 
         case 13:
+
+            // Enter
 
             popup.launch();
 
@@ -122,10 +132,10 @@ var popup = {
 
         event.preventDefault();
 
-        var current = $('.bookmark.active'), 
+        var current = $('.bookmark.active'),
             next;
 
-        next = (event.keyCode === 40) ? current.next('.bookmark') : current.prev('.bookmark') ;
+        next = (event.keyCode === 40) ? current.next('.bookmark') : current.prev('.bookmark');
 
         if (next.length) {
 
