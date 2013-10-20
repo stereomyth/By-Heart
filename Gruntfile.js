@@ -282,12 +282,12 @@ module.exports = function (grunt) {
                 options: {
                     namespace: 'Handlebars',
                     processName: function(filePath) {
-                        var pieces = filePath.split("/");
-                        return pieces[pieces.length - 1].replace('.handlebars', ''); 
+                        var pieces = filePath.split('/');
+                        return pieces[pieces.length - 1].replace('.handlebars', '');
                     }
                 },
                 files: {
-                    "<%= yeoman.app %>/scripts/templates.js": "<%= yeoman.app %>/templates/*.handlebars"
+                    '<%= yeoman.app %>/scripts/templates.js': '<%= yeoman.app %>/templates/*.handlebars'
                 }
             }
         }
