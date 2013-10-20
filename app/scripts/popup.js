@@ -29,10 +29,10 @@ var popup = {
 
         });
 
-        $('.bookmarks').on('mouseenter', 'a', function () {
+        $('.bookmarks').on('mouseenter', '.bookmark', function () {
 
             $(this).addClass('active');
-            $(this).siblings('a').removeClass('active');
+            $(this).siblings('.bookmark').removeClass('active');
 
         });
 
@@ -73,14 +73,13 @@ var popup = {
 
         case 13:
 
-            console.log('enter');
-            event.preventDefault();
+            popup.launch();
 
             break;
 
         default:
 
-            console.log(event.keyCode);
+            // console.log(event.keyCode);
 
             clearTimeout(popup.keyDelay);
 
@@ -115,7 +114,7 @@ var popup = {
 
         }
 
-        $('.bookmarks a').first().addClass('active');
+        $('.bookmarks .bookmark').first().addClass('active');
 
     },
 
@@ -123,10 +122,10 @@ var popup = {
 
         event.preventDefault();
 
-        var current = $('a.active'), 
+        var current = $('.bookmark.active'), 
             next;
 
-        next = (event.keyCode === 40) ? current.next('a') : current.prev('a') ;
+        next = (event.keyCode === 40) ? current.next('.bookmark') : current.prev('.bookmark') ;
 
         if (next.length) {
 
@@ -134,6 +133,12 @@ var popup = {
             next.addClass('active');
 
         }
+
+    },
+
+    launch: function () {
+
+        // open tab
 
     }
 
