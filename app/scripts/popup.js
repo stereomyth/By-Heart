@@ -23,37 +23,16 @@ var popup = {
 
     listnerInit: function () {
 
-        $('.search').on('keyup', function() {
+        $('body').on('keydown', function (event) {
 
-            clearTimeout(popup.keyDelay);
-
-            popup.keyDelay = setTimeout(popup.search, 200);
+            popup.handleKeys(event);
 
         });
 
-        $('body').on('keydown', function (event) {
+        $('.bookmarks').on('mouseenter', 'a', function () {
 
-            switch (event.keyCode) {
-            case 40:
-
-                console.log('down');
-                break;
-
-            case 38:
-
-                console.log('up');
-                break;
-
-            case 13:
-
-                console.log('enter');
-                break;
-
-            default:
-
-                console.log(event.keyCode);
-
-            }
+            $(this).addClass('active');
+            $(this).siblings('a').removeClass('active');
 
         });
 
@@ -73,6 +52,44 @@ var popup = {
 
     },
 
+    handleKeys: function (event) {
+
+        switch (event.keyCode) {
+        case 40:
+
+            // Down
+
+            popup.changeActive(event);
+            
+            break;
+
+        case 38:
+
+            // Up
+
+            popup.changeActive(event);
+
+            break;
+
+        case 13:
+
+            console.log('enter');
+            event.preventDefault();
+
+            break;
+
+        default:
+
+            console.log(event.keyCode);
+
+            clearTimeout(popup.keyDelay);
+
+            popup.keyDelay = setTimeout(popup.search, 200);
+
+        }
+
+    },
+
     buildList: function (bookmarksArray) {
 
         $('.bookmarks').empty();
@@ -86,13 +103,35 @@ var popup = {
 
             thisBookmark = $.extend(bookmark, {
 
-                datas: bookmarksArray[i]
+                datas: bookmarksArray[i],
+
+                uid: i
 
             });
 
             thisBookmark.init();
 
             $('.bookmarks').append(thisBookmark.domObject);
+
+        }
+
+        $('.bookmarks a').first().addClass('active');
+
+    },
+
+    changeActive: function (event) {
+
+        event.preventDefault();
+
+        var current = $('a.active'), 
+            next;
+
+        next = (event.keyCode === 40) ? current.next('a') : current.prev('a') ;
+
+        if (next.length) {
+
+            current.removeClass('active');
+            next.addClass('active');
 
         }
 
