@@ -42,9 +42,9 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
-      styles: {
-        files: ['<%= config.app %>/styles/{,*/}*.css'],
-        tasks: [],
+      sass: {
+        files: ['<%= config.app %>/styles/*.scss'],
+        tasks: ['sass'],
         options: {
           livereload: true
         }
@@ -101,6 +101,18 @@ module.exports = function (grunt) {
             '!<%= config.dist %>/.git*'
           ]
         }]
+      }
+    },
+
+    // build sass 
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          '<%= config.app %>/styles/main.css': '<%= config.app %>/styles/main.scss'
+        }
       }
     },
 
