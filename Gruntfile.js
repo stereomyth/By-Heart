@@ -32,9 +32,9 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['bowerInstall']
       },
-      js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+      coffee: {
+        files: ['<%= config.app %>/scripts/{,*/}*.{coffee,litcoffee,coffee.md}'],
+        tasks: ['coffee:chrome'],
         options: {
           livereload: true
         }
@@ -123,6 +123,37 @@ module.exports = function (grunt) {
           run: true,
           urls: ['http://localhost:<%= connect.options.port %>/index.html']
         }
+      }
+    },
+
+    // Compiles CoffeeScript to JavaScript
+    coffee: {
+      chrome: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.app %>/scripts',
+          src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+          dest: '<%= config.app %>/scripts',
+          ext: '.js'
+        }]
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= config.app %>/scripts',
+          src: '{,*/}*.{coffee,litcoffee,coffee.md}',
+          dest: '<%= config.app %>/scripts',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.coffee',
+          dest: './spec',
+          ext: '.js'
+        }]
       }
     },
 
@@ -249,12 +280,15 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up build process
     concurrent: {
       chrome: [
+        'coffee:chrome',
       ],
       dist: [
+        'coffee:dist',
         'imagemin',
         'svgmin'
       ],
       test: [
+        'coffee:test',
       ]
     },
 
