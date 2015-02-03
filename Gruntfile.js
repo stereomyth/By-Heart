@@ -281,7 +281,7 @@ module.exports = function (grunt) {
         options: {
           archive: function() {
             var manifest = grunt.file.readJSON('app/manifest.json');
-            return 'package/MyExtension-' + manifest.version + '.zip';
+            return 'package/By Heart-' + manifest.version + '.zip';
           }
         },
         files: [{

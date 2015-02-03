@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "MyExtension",
+    "message": "By Heart",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "Extension Descripton",
+    "message": "Beautiful and Quick Bookmark access.",
     "description": "The description of the application"
   }
 }

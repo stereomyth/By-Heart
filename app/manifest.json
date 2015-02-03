@@ -19,12 +19,12 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "MyExtension",
+    "default_title": "By Heart",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",
   "omnibox": {
-    "keyword": "MyExtension"
+    "keyword": "By Heart"
   },
   "permissions": [
     "tabs",
