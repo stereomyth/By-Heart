@@ -29,6 +29,7 @@
   "permissions": [
     "tabs",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "bookmarks"
   ]
 }
