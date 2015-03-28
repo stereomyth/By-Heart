@@ -39,6 +39,10 @@ module.exports = function (grunt) {
           livereload: true
         }
       },
+      handlebars: {
+        files: ['<%= config.app %>/partials/*.hbs'],
+        tasks: ['handlebars']
+      },
       gruntfile: {
         files: ['Gruntfile.js']
       },
@@ -337,12 +341,30 @@ module.exports = function (grunt) {
           dest: ''
         }]
       }
+    },
+
+    // compile handlebars templates
+    handlebars: {
+      compile: {
+        options: {
+          namespace: "hbs",
+          processName: function(filePath) {
+            var split = filePath.split('/');
+            return split[split.length-1].split('.')[0];
+          }
+        },
+        files: {
+          "<%= config.app %>/scripts/hbs.js": "<%= config.app %>/partials/node.hbs",
+        }
+      }
     }
+
   });
 
   grunt.registerTask('debug', function () {
     grunt.task.run([
       'jshint',
+      'handlebars',
       'concurrent:chrome',
       'connect:chrome',
       'watch'
@@ -357,6 +379,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'chromeManifest:dist',
+    'handlebars',
     'useminPrepare',
     'concurrent:dist',
     'cssmin',
