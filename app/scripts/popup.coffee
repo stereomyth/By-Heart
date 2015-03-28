@@ -2,60 +2,64 @@
 
 log = (content) -> console.log content
 
-# $('.hole').append('cheese')
-
 
 # newTree
 
-typeNode = (node, depth) ->
+typeNode = (node, parent, depth) ->
     if node.children?
-        new Folder node, depth
+        new Folder node, parent, depth
     else
-        new Bookmark node, depth
+        new Bookmark node, parent, depth
 
 class Tree
     constructor: (@seed) ->
-        @children = (typeNode node, 0 for node in @seed)
-        # log @children
+        @domObj = $('.tree')
+        @children = (typeNode node, @, 0 for node in @seed)
+
 
 class Node
-    constructor: (@obj, @depth) -> 
-        log @obj.title
+    constructor: (@obj, @parent, @depth) -> 
+        @buildDom(@parent.domObj)
 
-    # log: ->
-    #     log @obj
+    buildDom: (dest) ->
+        @domObj = $(hbs.node {obj: @obj, depth: @depth})
+
+        dest.children('.children').append(@domObj)
+
+        @domObj.on 'click', (event) => 
+            event.stopPropagation()
+            @action()
+
 
 class Folder extends Node
-    constructor: (@obj, @depth) ->
-        @getChildren @obj.children
+    constructor: (@obj, @parent, @depth) ->
+        @active = off
         super
 
-    getChildren: (children) ->
-        # log children
-        @children = (typeNode node, @depth++ for node in children)
+    getChildren: () ->
+        # log @domObj
+        @children = (typeNode node, @, @depth++ for node in @obj.children)
+
+    action: ->
+        if @active then @close() else @open()
+
+    open: ->
+        if @children?
+            @domObj.children('.children').show() 
+        else 
+            @getChildren()
+        
+        @active = on
+
+    close: ->
+        @domObj.children('.children').hide() 
+        @active = off
 
 
 class Bookmark extends Node
-    constructor: (@obj, @depth) -> 
-        super
 
-
-
-# node1 = new Node 'john'
-
-# node1.askName()
-
-
-
-# plantSeed = (oldTree) -> 
-    
-
-
-
-# eat food for food in ['toast', 'cheese', 'wine']
-
-
-
+    action: ->
+        log 'open link'
 
 
 # get tree and begin plantSeed

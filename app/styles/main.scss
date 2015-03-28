@@ -1,8 +1,29 @@
 body {
-  padding: 20px;
-  width: 300px;
+  // padding: 20px;
+  // width: 300px;
+  padding: 0;
+  margin: 0;
 
   h1 {
   	margin: 0;
   }
+}
+
+.folder {
+	padding: 20px;
+	border-top: 1px solid lightgrey;
+	white-space: nowrap;
+
+	&:hover, &.active {
+		background-color: tomato;
+		color: #fff;
+	}
+
+	&:first-child {
+		border-top: none;
+	}
+
+	&.open {
+		font-weight: bold;		
+	}
 }
